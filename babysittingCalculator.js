@@ -4,7 +4,7 @@ function calculatePayment(startTime, endTime, bedTime){
 
 	if(endTime < 17)
 	{
-		return AFTER_MIDNIGHT_PAY;
+		return endTime * AFTER_MIDNIGHT_PAY;
 	}
 	if(startTime >= bedTime)
 	{
