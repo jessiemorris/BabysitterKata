@@ -18,5 +18,9 @@ function calculatePayment(startTime, endTime, bedTime){
 	{
 		return (endTime - startTime) * POST_BEDTIME_PAY;
 	}
-	return (endTime - startTime) * PRE_BEDTIME_PAY;
+	if(endTime >= bedTime)
+	{
+		return (((bedTime - startTime) * PRE_BEDTIME_PAY) + ((endTime - bedTime) * POST_BEDTIME_PAY));
+	}
+
 }
