@@ -9,3 +9,12 @@ QUnit.test( "BabysitterWorksOneHourBeforeBedtimeAndReceives12Dollars", function(
 
 	assert.equal(calculatePayment(startTime, endTime, bedTime), 12);
 });
+
+QUnit.test( "BabysitterWorksTwoHoursBeforeBedtimeAndReceives24Dollars", function(assert) {
+	var startTime = 17;  //5:00 PM
+	var endTime = 19;    //7:00 PM
+	var bedTime = 21;    //9:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), 24);
+});
+

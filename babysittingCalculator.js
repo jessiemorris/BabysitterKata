@@ -1,3 +1,4 @@
 function calculatePayment(startTime, endTime, bedTime){
-	return 12;
+
+	return (endTime - startTime) * 12;
 }
