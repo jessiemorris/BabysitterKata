@@ -1,15 +1,15 @@
 function calculatePayment(startTime, endTime, bedTime){
 
-	var PRE_BEDTIME_PAY = 12, POST_BEDTIME_PAY = 8, AFTER_MIDNIGHT_PAY = 16;
+	var PRE_BEDTIME_PAY = 12, POST_BEDTIME_PAY = 8, AFTER_MIDNIGHT_PAY = 16, FIVE_PM = 17;
 
 	var hoursBeforeBedtime = 0;
 	var hoursAfterBedtime = 0;
 	var hoursAfterMidnight = 0;
 
 	//Babysitting shift ends after midnight
-	if(endTime < 17)
+	if(endTime < FIVE_PM)
 	{
-		if(startTime > 17)
+		if(startTime > FIVE_PM)
 		{
 			hoursAfterMidnight = endTime;
 		}
@@ -18,11 +18,6 @@ function calculatePayment(startTime, endTime, bedTime){
 			hoursAfterMidnight = (endTime - startTime);
 		}
 	}
-
-	// if(startTime >= bedTime)
-	// {
-	// 	totalPay += (endTime - startTime) * POST_BEDTIME_PAY;
-	// }
 
 	if(endTime > bedTime)
 	{
@@ -36,7 +31,7 @@ function calculatePayment(startTime, endTime, bedTime){
 			hoursAfterBedtime =  (endTime - bedTime);
 		}
 	}
-	else if(startTime >= 17)
+	else if(startTime >= FIVE_PM)
 	{
 			hoursBeforeBedtime =  (endTime - startTime);
 			
