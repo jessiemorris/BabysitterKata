@@ -1,5 +1,14 @@
 function calculatePayment(startTime, endTime, bedTime){
 
+	if((startTime > 4 && startTime < 17) || 
+		(endTime > 4 && endTime < 17) || 
+		bedTime < 17 || bedTime > 24 || 
+		startTime > 24 || endTime > 24 || 
+		startTime < 0 || endTime < 0 || bedTime < 0)
+	{
+		return -1;
+	}
+
 	var PRE_BEDTIME_PAY = 12, POST_BEDTIME_PAY = 8, AFTER_MIDNIGHT_PAY = 16, FIVE_PM = 17;
 
 	var hoursBeforeBedtime = 0;

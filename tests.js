@@ -171,3 +171,83 @@ QUnit.test( "BabysitterWorksUntilMidnightFromTenPmAndReceives20Dollars_MidpointB
 	assert.equal(calculatePayment(startTime, endTime, bedTime), 20);
 });
 
+QUnit.module("Out Of Bounds Tests");
+QUnit.test( "BabysitterPassesInInvalidStartTimeReceivesNegativeOne", function(assert) {
+	var startTime = 6;   //6:00 AM
+	var endTime = 24;    //12:00 AM
+	var bedTime = 23;    //11:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidStartTimeReceivesNegativeOne_Over24", function(assert) {
+	var startTime = 25;   
+	var endTime = 24;    //12:00 AM
+	var bedTime = 23;    //11:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidStartTimeReceivesNegativeOne_BelowZero", function(assert) {
+	var startTime = -1;   
+	var endTime = 24;    //12:00 AM
+	var bedTime = 23;    //11:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidEndTimeReceivesNegativeOne", function(assert) {
+	var startTime = 17;   //5:00 PM
+	var endTime = 6;      //6:00 AM
+	var bedTime = 23;     //11:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidEndTimeReceivesNegativeOne_Over24", function(assert) {
+	var startTime = 17;   //5:00 PM
+	var endTime = 25;     
+	var bedTime = 23;     //11:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidEndTimeReceivesNegativeOne_BelowZero", function(assert) {
+	var startTime = 17;   //5:00 PM
+	var endTime = -1;      
+	var bedTime = 23;     //11:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidBedTimeReceivesNegativeOne_AfterMidnight", function(assert) {
+	var startTime = 17;   //5:00 PM
+	var endTime = 24;     //12:00 AM
+	var bedTime = 1;      //1:00 AM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidBedTimeReceivesNegativeOne_BeforeFivePM", function(assert) {
+	var startTime = 17;   //5:00 PM
+	var endTime = 24;     //12:00 AM
+	var bedTime = 16;     //4:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidBedTimeReceivesNegativeOne_Over24", function(assert) {
+	var startTime = 17;   //5:00 PM
+	var endTime = 24;     //12:00 AM
+	var bedTime = 25;     
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
+
+QUnit.test( "BabysitterPassesInInvalidBedTimeReceivesNegativeOne_BelowZero", function(assert) {
+	var startTime = 17;   //6:00 AM
+	var endTime = 24;    //12:00 AM
+	var bedTime = -1;    
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), -1);
+});
