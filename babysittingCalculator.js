@@ -9,7 +9,8 @@ function calculatePayment(startTime, endTime, bedTime){
 		return -1;
 	}
 
-	var PRE_BEDTIME_PAY = 12, POST_BEDTIME_PAY = 8, AFTER_MIDNIGHT_PAY = 16, FIVE_PM = 17;
+	var PRE_BEDTIME_PAY = 12, POST_BEDTIME_PAY = 8, AFTER_MIDNIGHT_PAY = 16, 
+		FIVE_PM = 17, MIDNIGHT = 24;
 
 	var hoursBeforeBedtime = 0;
 	var hoursAfterBedtime = 0;
@@ -60,7 +61,7 @@ function calculatePayment(startTime, endTime, bedTime){
 			{
 				hoursBeforeBedtime = (bedTime - startTime);
 			}
-			hoursAfterBedtime = 24 - Math.max(bedTime, startTime);
+			hoursAfterBedtime = MIDNIGHT - Math.max(bedTime, startTime);
 		}
 			
 	}
