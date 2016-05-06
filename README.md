@@ -29,6 +29,6 @@ I want to calculate my nightly charge
 
 Assumptions:
 
--The calculator will only be called with integer values.
--Times are represented by hours as integers in standard 24 hour format with the exception of midnight
--Midnight will be represented by 24
+- The calculator will only be called with integer values.
+- Times are represented by hours as integers in standard 24 hour format with the exception of midnight
+- Midnight will be represented by 24
