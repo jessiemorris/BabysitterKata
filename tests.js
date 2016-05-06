@@ -113,6 +113,20 @@ QUnit.test( "BabysitterWorksMaximumShiftFromFiveToFourWithTenPMBedtimeAndReceive
 	assert.equal(calculatePayment(startTime, endTime, bedTime), 140);
 });
 
+QUnit.test( "BabysitterWorksMaximumShiftFromFiveToFourWithFivePMBedtimeAndReceives120Dollars", function(assert) {
+	var startTime = 17;   //7:00 PM
+	var endTime = 4;      //11:00 PM
+	var bedTime = 17;     //9:00 PM
 
+	assert.equal(calculatePayment(startTime, endTime, bedTime), 120);
+});
+
+QUnit.test( "BabysitterWorksMaximumShiftFromFiveToFourWithMidnightBedtimeAndReceives148Dollars", function(assert) {
+	var startTime = 17;   //7:00 PM
+	var endTime = 4;      //11:00 PM
+	var bedTime = 24;     //9:00 PM
+
+	assert.equal(calculatePayment(startTime, endTime, bedTime), 148);
+});
 
 
