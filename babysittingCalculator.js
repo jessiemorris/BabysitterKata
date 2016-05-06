@@ -46,6 +46,7 @@ function calculatePayment(startTime, endTime, bedTime){
 		}
 		else
 		{
+			//ensure we never get a negative hours before bedtime
 			if(startTime < bedTime)
 			{
 				hoursBeforeBedtime = (bedTime - startTime);
