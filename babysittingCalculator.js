@@ -46,8 +46,11 @@ function calculatePayment(startTime, endTime, bedTime){
 		}
 		else
 		{
-			hoursBeforeBedtime =  (bedTime - startTime);
-			hoursAfterBedtime = 24 - bedTime;
+			if(startTime < bedTime)
+			{
+				hoursBeforeBedtime = (bedTime - startTime);
+			}
+			hoursAfterBedtime = 24 - Math.max(bedTime, startTime);
 		}
 			
 	}
