@@ -95,3 +95,12 @@ QUnit.test( "BabysitterWorksTwoHoursBeforeBedtimeAndTwoHoursAfterAndReceives40Do
 
 	assert.equal(calculatePayment(startTime, endTime, bedTime), 40);
 });
+
+QUnit.module("Maximum Shift Test");
+QUnit.test( "BabysitterWorksMaximumShiftFromFiveToFourWithNinePMBedtimeAndReceives136Dollars", function(assert) {
+var startTime = 17;   //7:00 PM
+var endTime = 4;     //11:00 PM
+var bedTime = 21;     //9:00 PM
+
+assert.equal(calculatePayment(startTime, endTime, bedTime), 136);
+});
