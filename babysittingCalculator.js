@@ -70,12 +70,11 @@ function calculatePayment(startTime, endTime, bedTime){
 
 function isValidBabysittingHour(inputHour)
 {
-	//Check for times which do not exist in a 24 hour clock
-	if(inputHour < 0 || inputHour > 24)
+	//Check for times which are between 4am and 5am
+	if(!isValidTime(inputHour))
 	{
 		return false;
 	}
-
 	//Check for times which are between 4am and 5am
 	if(inputHour > 4 && inputHour < 17)
 	{
@@ -87,16 +86,23 @@ function isValidBabysittingHour(inputHour)
 function isValidBedTime(bedTime)
 {
 	//Check for times which do not exist in a 24 hour clock
-	if(bedTime < 0 || bedTime > 24)
+	if(!isValidTime(bedTime))
 	{
 		return false;
 	}
-
 	//Bedtime cannot be before 5PM or after midnight
 	if(bedTime < 17)
 	{
 		return false;
 	}
-
+	return true;
+}
+function isValidTime(inputHour)
+{
+	//Check for times which do not exist in a 24 hour clock
+	if(inputHour < 0 || inputHour > 24)
+	{
+		return false;
+	}
 	return true;
 }
