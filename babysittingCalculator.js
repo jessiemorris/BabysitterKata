@@ -14,41 +14,9 @@ function calculatePayment(startTime, endTime, bedTime){
 
 
 	hoursAfterMidnight = calculateHoursAfterMidnight(startTime, endTime);
+	hoursBeforeBedtime = calculateHoursBeforeBedtime(startTime, endTime, bedTime);
+	hoursAfterBedtime = calculateHoursAfterBedtime(startTime, endTime, bedTime);
 
-	//If endTime is after bedtime(but not after midnight) we know we'll have some hours between bedtime
-	//and midnight to account for.  Take care of hours before bedtime for these scenarios here as well.
-	if(endTime > bedTime)
-	{
-		if(startTime > bedTime)
-		{
-			hoursAfterBedtime =  (endTime - startTime);
-		}
-		else
-		{
-			hoursBeforeBedtime =  (bedTime - startTime);
-			hoursAfterBedtime =  (endTime - bedTime);
-		}
-	}
-	//if endTime is either before bedtime or after midnight we'll want to calculate the hours before bedtime
-	//and if endTime is after midnight, we'll need to caulcate the hours between bedtime and midnight using
-	//midnight as the anchor.
-	else if(startTime >= FIVE_PM)
-	{
-		if(endTime >= FIVE_PM)
-		{
-			hoursBeforeBedtime =  (endTime - startTime);
-		}
-		else
-		{
-			//ensure we never get a negative hours before bedtime
-			if(startTime < bedTime)
-			{
-				hoursBeforeBedtime = (bedTime - startTime);
-			}
-			hoursAfterBedtime = MIDNIGHT - Math.max(bedTime, startTime);
-		}
-			
-	}
 
 	return ((hoursBeforeBedtime * PRE_BEDTIME_PAY) + 
 			(hoursAfterBedtime * POST_BEDTIME_PAY) +
@@ -110,6 +78,50 @@ function calculateHoursAfterMidnight(startTime, endTime)
 	{
 		return (endTime - startTime);
 	}
+}
+
+function calculateHoursBeforeBedtime(startTime, endTime, bedTime)
+{
+	if(isAfterMidnight(startTime) || startTime > bedTime)
+	{
+		return 0;
+	}
+	if(!isAfterMidnight(endTime) && endTime < bedTime)
+	{
+		return endTime - startTime;
+	}
+	else
+	{
+		return bedTime - startTime;
+	}
+}
+
+function calculateHoursAfterBedtime(startTime, endTime, bedTime)
+{
+	if(isAfterMidnight(startTime))
+	{
+		return 0;
+	}
+	if(endTime > bedTime)
+	{
+		if(startTime > bedTime)
+		{
+			return (endTime - startTime);
+		}
+		else
+		{
+			return (endTime - bedTime);
+		}
+	}
+	else if(isAfterMidnight(endTime))
+	{
+		return 24 - Math.max(bedTime, startTime);
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
 function isAfterMidnight(inputHour)
