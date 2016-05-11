@@ -1,3 +1,12 @@
+var CONSTANTS = {
+	PRE_BEDTIME_PAY : 12, 
+	POST_BEDTIME_PAY : 8, 
+	AFTER_MIDNIGHT_PAY : 16, 
+	FIVE_PM : 17, 
+	MIDNIGHT : 24,
+	FOUR_AM : 4
+};
+
 function calculatePayment(startTime, endTime, bedTime){
 
 	if(!isValidBabysittingHour(startTime) || !isValidBabysittingHour(endTime) || !isValidBedTime(bedTime))
@@ -5,22 +14,13 @@ function calculatePayment(startTime, endTime, bedTime){
 		return -1;
 	}
 
-	var PRE_BEDTIME_PAY = 12, POST_BEDTIME_PAY = 8, AFTER_MIDNIGHT_PAY = 16, 
-		FIVE_PM = 17, MIDNIGHT = 24;
+	var hoursBeforeBedtime = calculateHoursBeforeBedtime(startTime, endTime, bedTime);
+	var hoursAfterBedtime = calculateHoursAfterBedtime(startTime, endTime, bedTime);
+	var hoursAfterMidnight = calculateHoursAfterMidnight(startTime, endTime);
 
-	var hoursBeforeBedtime = 0;
-	var hoursAfterBedtime = 0;
-	var hoursAfterMidnight = 0;
-
-
-	hoursAfterMidnight = calculateHoursAfterMidnight(startTime, endTime);
-	hoursBeforeBedtime = calculateHoursBeforeBedtime(startTime, endTime, bedTime);
-	hoursAfterBedtime = calculateHoursAfterBedtime(startTime, endTime, bedTime);
-
-
-	return ((hoursBeforeBedtime * PRE_BEDTIME_PAY) + 
-			(hoursAfterBedtime * POST_BEDTIME_PAY) +
-			(hoursAfterMidnight * AFTER_MIDNIGHT_PAY));	
+	return ((hoursBeforeBedtime * CONSTANTS.PRE_BEDTIME_PAY) + 
+			(hoursAfterBedtime * CONSTANTS.POST_BEDTIME_PAY) +
+			(hoursAfterMidnight * CONSTANTS.AFTER_MIDNIGHT_PAY));	
 	
 }
 
@@ -32,7 +32,7 @@ function isValidBabysittingHour(inputHour)
 		return false;
 	}
 	//Check for times which are between 4am and 5am
-	if(inputHour > 4 && inputHour < 17)
+	if(inputHour > 4 && inputHour < CONSTANTS.FIVE_PM)
 	{
 		return false;
 	}
@@ -65,7 +65,6 @@ function isValidTime(inputHour)
 
 function calculateHoursAfterMidnight(startTime, endTime)
 {
-	//If endtime > 4, there are no after midnight hours.
 	if(!isAfterMidnight(endTime))
 	{
 		return 0;
@@ -115,7 +114,7 @@ function calculateHoursAfterBedtime(startTime, endTime, bedTime)
 	}
 	else if(isAfterMidnight(endTime))
 	{
-		return 24 - Math.max(bedTime, startTime);
+		return CONSTANTS.MIDNIGHT - Math.max(bedTime, startTime);
 	}
 	else
 	{
@@ -126,5 +125,5 @@ function calculateHoursAfterBedtime(startTime, endTime, bedTime)
 
 function isAfterMidnight(inputHour)
 {
-	return inputHour <= 4;
+	return inputHour <= CONSTANTS.FOUR_AM;
 }
