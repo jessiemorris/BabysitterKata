@@ -37,7 +37,7 @@ var BabysittingCalculator = ( function( window, undefined ) {
 			return false;
 		}
 		//Check for times which are between 4am and 5am
-		if(inputHour > 4 && inputHour < TIMES.FIVE_PM)
+		if(inputHour > TIMES.FOUR_AM && inputHour < TIMES.FIVE_PM)
 		{
 			return false;
 		}
