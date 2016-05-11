@@ -64,7 +64,7 @@ QUnit.test( "BabysitterWorksTwoHoursAfterBedtimeAndBeforeMidnightAndReceives16Do
 
 QUnit.module("After Midnight Tests");
 QUnit.test( "BabysitterWorksOneHourAfterMidnightAndReceives16Dollars", function(assert) {
-	var startTime = 0;   //12:00 AM
+	var startTime = 24;   //12:00 AM
 	var endTime = 1;     //1:00 AM
 	var bedTime = 21;    //9:00 PM
 
@@ -72,7 +72,7 @@ QUnit.test( "BabysitterWorksOneHourAfterMidnightAndReceives16Dollars", function(
 });
 
 QUnit.test( "BabysitterWorksTwoHoursAfterMidnightAndReceives32Dollars", function(assert) {
-	var startTime = 0;   //12:00 AM
+	var startTime = 24;   //12:00 AM
 	var endTime = 2;     //2:00 AM
 	var bedTime = 21;    //9:00 PM
 

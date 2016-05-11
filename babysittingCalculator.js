@@ -56,11 +56,16 @@ function isValidBedTime(bedTime)
 function isValidTime(inputHour)
 {
 	//Check for times which do not exist in a 24 hour clock
-	if(inputHour < 0 || inputHour > 24)
+	if(inputHour <= 0 || inputHour > 24)
 	{
 		return false;
 	}
 	return true;
+}
+
+function isAfterMidnight(inputHour)
+{
+	return inputHour <= CONSTANTS.FOUR_AM;
 }
 
 function calculateHoursAfterMidnight(startTime, endTime)
@@ -123,7 +128,4 @@ function calculateHoursAfterBedtime(startTime, endTime, bedTime)
 	
 }
 
-function isAfterMidnight(inputHour)
-{
-	return inputHour <= CONSTANTS.FOUR_AM;
-}
+
