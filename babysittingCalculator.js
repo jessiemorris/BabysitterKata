@@ -1,4 +1,4 @@
-var BabysittingCalculator = ( function( window, undefined ) {
+var BabysittingCalculator = ( function() {
 
 	var PAYGRADES = {
 			PRE_BEDTIME_PAY : 12, 
@@ -133,6 +133,6 @@ var BabysittingCalculator = ( function( window, undefined ) {
 
 	return {"calculatePayment" : calculatePayment};
 
-} )( window );
+})();
 
 
