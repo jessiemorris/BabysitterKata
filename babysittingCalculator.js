@@ -49,7 +49,7 @@ var BabysittingCalculator = ( function( window, undefined ) {
 			return false;
 		}
 		//Bedtime cannot be before 5PM or after midnight
-		if(bedTime < 17)
+		if(bedTime < CONSTANTS.FIVE_PM)
 		{
 			return false;
 		}
