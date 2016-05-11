@@ -1,12 +1,15 @@
 var BabysittingCalculator = ( function( window, undefined ) {
 
-	var CONSTANTS = {
-		PRE_BEDTIME_PAY : 12, 
-		POST_BEDTIME_PAY : 8, 
-		AFTER_MIDNIGHT_PAY : 16, 
-		FIVE_PM : 17, 
-		MIDNIGHT : 24,
-		FOUR_AM : 4
+	var PAYGRADES = {
+			PRE_BEDTIME_PAY : 12, 
+			POST_BEDTIME_PAY : 8, 
+			AFTER_MIDNIGHT_PAY : 16, 
+	};
+
+	var TIMES = {
+			FIVE_PM : 17, 
+			MIDNIGHT : 24,
+			FOUR_AM : 4
 	};
 	
 	function calculatePayment(startTime, endTime, bedTime){
@@ -20,25 +23,24 @@ var BabysittingCalculator = ( function( window, undefined ) {
 		var hoursAfterBedtime = calculateHoursAfterBedtime(startTime, endTime, bedTime);
 		var hoursAfterMidnight = calculateHoursAfterMidnight(startTime, endTime);
 	
-		return ((hoursBeforeBedtime * CONSTANTS.PRE_BEDTIME_PAY) + 
-				(hoursAfterBedtime * CONSTANTS.POST_BEDTIME_PAY) +
-				(hoursAfterMidnight * CONSTANTS.AFTER_MIDNIGHT_PAY));	
+		return ((hoursBeforeBedtime * PAYGRADES.PRE_BEDTIME_PAY) + 
+				(hoursAfterBedtime * PAYGRADES.POST_BEDTIME_PAY) +
+				(hoursAfterMidnight * PAYGRADES.AFTER_MIDNIGHT_PAY));	
 		
 	}
 	
 	function isValidBabysittingHour(inputHour)
 	{
-		//Check for times which are between 4am and 5am
+		//Check for times which do not exist in a 24 hour clock
 		if(!isValidTime(inputHour))
 		{
 			return false;
 		}
 		//Check for times which are between 4am and 5am
-		if(inputHour > 4 && inputHour < CONSTANTS.FIVE_PM)
+		if(inputHour > 4 && inputHour < TIMES.FIVE_PM)
 		{
 			return false;
 		}
-	
 		return true;
 	}
 	function isValidBedTime(bedTime)
@@ -49,7 +51,7 @@ var BabysittingCalculator = ( function( window, undefined ) {
 			return false;
 		}
 		//Bedtime cannot be before 5PM or after midnight
-		if(bedTime < CONSTANTS.FIVE_PM)
+		if(bedTime < TIMES.FIVE_PM)
 		{
 			return false;
 		}
@@ -57,7 +59,6 @@ var BabysittingCalculator = ( function( window, undefined ) {
 	}
 	function isValidTime(inputHour)
 	{
-		//Check for times which do not exist in a 24 hour clock
 		if(inputHour <= 0 || inputHour > 24)
 		{
 			return false;
@@ -67,7 +68,7 @@ var BabysittingCalculator = ( function( window, undefined ) {
 	
 	function isAfterMidnight(inputHour)
 	{
-		return inputHour <= CONSTANTS.FOUR_AM;
+		return inputHour <= TIMES.FOUR_AM;
 	}
 	
 	function calculateHoursAfterMidnight(startTime, endTime)
@@ -121,7 +122,7 @@ var BabysittingCalculator = ( function( window, undefined ) {
 		}
 		else if(isAfterMidnight(endTime))
 		{
-			return CONSTANTS.MIDNIGHT - Math.max(bedTime, startTime);
+			return TIMES.MIDNIGHT - Math.max(bedTime, startTime);
 		}
 		else
 		{
