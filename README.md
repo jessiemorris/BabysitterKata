@@ -5,7 +5,7 @@ Usage
 ----------
 
 - Add  <script src="babysittingCalculator.js"></script> to any applications which desire to use the calculator
-- Invoke calculatePayment(startTime, endTime, bedTime) with integer values (see below assumptions) e.g. calculatePayment(17, 19, 18)
+- Invoke BabysittingCalculator.calculatePayment(startTime, endTime, bedTime) with integer values (see below assumptions) e.g. calculatePayment(17, 19, 18)
 - To view unit tests open ./tests/index.html in any browser where this calculator has been consumed for testing
 - Tested and implemented via Chrome Version 50.0.2661.86 (64-bit) on OS X
 
