@@ -12,20 +12,8 @@ function calculatePayment(startTime, endTime, bedTime){
 	var hoursAfterBedtime = 0;
 	var hoursAfterMidnight = 0;
 
-	//Babysitting shift ends after midnight
-	if(endTime < FIVE_PM)
-	{
-		//if startTime is after 5, we know endTime is the amount of hours worked after midnight
-		if(startTime >= FIVE_PM)
-		{
-			hoursAfterMidnight = endTime;
-		}
-		//Otherwise, get the amount of hours between start and end time
-		else
-		{
-			hoursAfterMidnight = (endTime - startTime);
-		}
-	}
+
+	hoursAfterMidnight = calculateHoursAfterMidnight(startTime, endTime);
 
 	//If endTime is after bedtime(but not after midnight) we know we'll have some hours between bedtime
 	//and midnight to account for.  Take care of hours before bedtime for these scenarios here as well.
@@ -105,4 +93,26 @@ function isValidTime(inputHour)
 		return false;
 	}
 	return true;
+}
+
+function calculateHoursAfterMidnight(startTime, endTime)
+{
+	//If endtime > 4, there are no after midnight hours.
+	if(!isAfterMidnight(endTime))
+	{
+		return 0;
+	}
+	if(!isAfterMidnight(startTime))
+	{
+		return endTime
+	}
+	else
+	{
+		return (endTime - startTime);
+	}
+}
+
+function isAfterMidnight(inputHour)
+{
+	return inputHour <= 4;
 }
